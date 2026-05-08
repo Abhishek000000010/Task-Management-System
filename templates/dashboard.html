@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div id="section-dashboard" class="page-section active">
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="stat-icon blue"><i class="ph-fill ph-list-numbers"></i></div>
+            <div class="stat-info">
+                <div class="stat-value" id="totalTasks">0</div>
+                <div class="stat-label">Total Tasks</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon green"><i class="ph-fill ph-check-circle"></i></div>
+            <div class="stat-info">
+                <div class="stat-value" id="completedTasks">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon orange"><i class="ph-fill ph-clock"></i></div>
+            <div class="stat-info">
+                <div class="stat-value" id="pendingTasks">0</div>
+                <div class="stat-label">Pending</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon purple"><i class="ph-fill ph-chart-pie-slice"></i></div>
+            <div class="stat-info">
+                <div class="stat-value" id="completionRate">0%</div>
+                <div class="stat-label">Completion Rate</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="add-task-card">
+        <h3><i class="ph ph-plus-circle"></i> New Task</h3>
+        <form id="addTaskForm">
+            <div class="form-row">
+                <input type="text" id="taskTitle" placeholder="What needs to be done?" required autocomplete="off">
+                <select id="taskPriority">
+                    <option value="High">High</option>
+                    <option value="Medium" selected>Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+                <button type="submit" class="btn btn-primary"><i class="ph-bold ph-plus"></i> Add</button>
+            </div>
+            <textarea id="taskDesc" rows="2" placeholder="Description (optional)"></textarea>
+        </form>
+    </div>
+
+    <h3 class="section-heading">Recent Tasks</h3>
+    <div class="task-grid" id="recentTaskList">
+    </div>
+</div>
+
+<div id="section-tasks" class="page-section">
+    <div class="filter-bar" id="filterBar">
+        <button class="filter-tab active" data-filter="all">All <span class="filter-count" id="countAll">0</span></button>
+        <button class="filter-tab" data-filter="pending">Pending <span class="filter-count" id="countPending">0</span></button>
+        <button class="filter-tab" data-filter="completed">Completed <span class="filter-count" id="countCompleted">0</span></button>
+    </div>
+
+    <div class="task-grid" id="taskList">
+    </div>
+</div>
+
+<div id="section-analytics" class="page-section">
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="stat-icon blue"><i class="ph-fill ph-list-numbers"></i></div>
+            <div class="stat-info">
+                <div class="stat-value" id="anTotalTasks">0</div>
+                <div class="stat-label">Total Tasks</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon green"><i class="ph-fill ph-check-circle"></i></div>
+            <div class="stat-info">
+                <div class="stat-value" id="anCompletedTasks">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon orange"><i class="ph-fill ph-clock"></i></div>
+            <div class="stat-info">
+                <div class="stat-value" id="anPendingTasks">0</div>
+                <div class="stat-label">Pending</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon purple"><i class="ph-fill ph-chart-pie-slice"></i></div>
+            <div class="stat-info">
+                <div class="stat-value" id="anCompletionRate">0%</div>
+                <div class="stat-label">Completion Rate</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="analytics-section">
+        <h3 class="section-heading">Priority Breakdown</h3>
+        <div class="stats-row three-col">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: var(--red-light); color: var(--red);"><i class="ph-fill ph-fire"></i></div>
+                <div class="stat-info">
+                    <div class="stat-value" id="anHighCount">0</div>
+                    <div class="stat-label">High Priority</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: var(--orange-light); color: var(--orange);"><i class="ph-fill ph-flag"></i></div>
+                <div class="stat-info">
+                    <div class="stat-value" id="anMediumCount">0</div>
+                    <div class="stat-label">Medium Priority</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: var(--green-light); color: var(--green);"><i class="ph-fill ph-leaf"></i></div>
+                <div class="stat-info">
+                    <div class="stat-value" id="anLowCount">0</div>
+                    <div class="stat-label">Low Priority</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="analytics-section">
+        <h3 class="section-heading">Progress</h3>
+        <div class="progress-card">
+            <div class="progress-header">
+                <span>Overall Completion</span>
+                <span id="anProgressPercent">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="anProgressBar" style="width: 0%;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
